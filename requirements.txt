@@ -1,0 +1,6 @@
+pandas
+selenium
+tabulate
+tqdm
+webdriver-manager
+colorama
