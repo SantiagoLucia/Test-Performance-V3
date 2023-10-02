@@ -9,14 +9,31 @@ from datetime import datetime
 from tqdm import tqdm
 import os
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     tiempo = datetime.now()
     fecha = tiempo.strftime("%d/%m/%Y")
     hora = tiempo.strftime("%H:%M:%S")
-    salida = f'./logs/test_performance_{tiempo.strftime("%Y-%m-%d-%H-%M-%S")}.log'
-    result_dic_con = {'TEST': [], 'NODO': [], 'TIEMPO (seg)': [], 'RESULTADO': [], 'NRO GDEBA': []}
-    result_dic_log = {'TEST': [], 'NODO': [], 'TIEMPO (seg)': [], 'RESULTADO': [], 'NRO GDEBA': []}
-    pbar = tqdm(total=17, ncols=90, colour='green', bar_format = "{l_bar}{bar}| {n_fmt}/{total_fmt}")
+    salida = f'./logs/test_performance_{tiempo.strftime("%Y-%m-%d-%H-%M")}.log'
+    result_dic_con = {
+        "TEST": [],
+        "NODO": [],
+        "TIEMPO (seg)": [],
+        "RESULTADO": [],
+        "NRO GDEBA": [],
+    }
+    result_dic_log = {
+        "TEST": [],
+        "NODO": [],
+        "TIEMPO (seg)": [],
+        "RESULTADO": [],
+        "NRO GDEBA": [],
+    }
+    pbar = tqdm(
+        total=17,
+        ncols=90,
+        colour="green",
+        bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt}",
+    )
 
     # Ingreso Modulos
     pbar.set_description("Test Ingreso EU")
@@ -37,17 +54,17 @@ if __name__ == '__main__':
     pbar.set_description("Test Ingreso REDIP")
     actualizar(result_dic_con, result_dic_log, test_ingreso_redip())
     pbar.update(1)
-    
+
     # Funcionalidad GEDO
     pbar.set_description("Test Firmar gedo (TESTL)")
-    d = test_firmar_gedo('TESTL')
+    d = test_firmar_gedo("TESTL")
     actualizar(result_dic_con, result_dic_log, d)
     pbar.update(1)
     pbar.set_description("Test Firmar gedo (TESTT)")
-    actualizar(result_dic_con, result_dic_log, test_firmar_gedo('TESTT'))
+    actualizar(result_dic_con, result_dic_log, test_firmar_gedo("TESTT"))
     pbar.update(1)
     pbar.set_description("Test Firmar gedo (TESTI)")
-    actualizar(result_dic_con, result_dic_log, test_firmar_gedo('TESTI'))
+    actualizar(result_dic_con, result_dic_log, test_firmar_gedo("TESTI"))
     pbar.update(1)
     pbar.set_description("Test Firmar portafirma")
     actualizar(result_dic_con, result_dic_log, test_firmar_portafirma())
@@ -58,10 +75,10 @@ if __name__ == '__main__':
 
     # Funcionalidad CCOO
     pbar.set_description("Test Firmar ccoo (NOTA)")
-    actualizar(result_dic_con, result_dic_log, test_firmar_ccoo('NOTA'))
+    actualizar(result_dic_con, result_dic_log, test_firmar_ccoo("NOTA"))
     pbar.update(1)
     pbar.set_description("Test Firmar ccoo (MEMO)")
-    actualizar(result_dic_con, result_dic_log, test_firmar_ccoo('MEMO'))    
+    actualizar(result_dic_con, result_dic_log, test_firmar_ccoo("MEMO"))
     pbar.update(1)
 
     # Funcionalidad EE
@@ -80,14 +97,16 @@ if __name__ == '__main__':
     pbar.update(1)
     pbar.set_description("Finalizado")
     pbar.close()
-    
-    pdtabulate=lambda df:tabulate(df,headers='keys',tablefmt='pretty', showindex="never")
-    
+
+    pdtabulate = lambda df: tabulate(
+        df, headers="keys", tablefmt="pretty", showindex="never"
+    )
+
     df_con = pd.DataFrame(result_dic_con)
     print(pdtabulate(df_con))
 
     df_log = pd.DataFrame(result_dic_log)
-    with open(salida, 'w') as f:
+    with open(salida, "w") as f:
         f.write("TEST DE PERFORMANCE\n")
         f.write("====================\n")
         f.write("AMBIENTE: PRODUCCION\n")
@@ -95,7 +114,7 @@ if __name__ == '__main__':
         f.write(f"HORA:     {hora}\n")
         f.write("\n")
         f.write(pdtabulate(df_log))
-    
-    path=os.path.realpath(salida)
+
+    path = os.path.realpath(salida)
     os.startfile(path)
-    input('---Finalizado---')
+    input("---Finalizado---")

@@ -2,20 +2,20 @@ from utils.crear_sesion import crear_sesion
 from utils.buscar_elemento import buscar_elemento
 from webelements import cas, eu, euc, eue, eug, rlm, redip
 from selenium.webdriver.common.by import By
-from selenium.common.exceptions import TimeoutException
-import time 
+import time
 import pandas as pd
 from tabulate import tabulate
 from utils.actualizar_dic import actualizar
 from tqdm import tqdm
-from config import URL_CCOO, URL_EE, URL_REDIP, URL_RLM, USER,PASSW,URL_EU,URL_GEDO
+from config import USER, PASSW
+
 
 def test_ingreso_eu():
     intentos = 0
-    resultado = ''
-    nodo = ''
-    t_totals = ''
-    url = URL_EU
+    resultado = ""
+    nodo = ""
+    t_totals = ""
+    url = "https://cas.gdeba.gba.gob.ar/acceso/login/?service=https://eu.gdeba.gba.gob.ar/eu-web/j_spring_cas_security_check"
     while intentos < 3:
         try:
             driver = crear_sesion()
@@ -30,7 +30,7 @@ def test_ingreso_eu():
             t_total = t_fin - t_ini
             t_totals = str("%.2f" % t_total)
             nodo = buscar_elemento(driver, By.CSS_SELECTOR, eu.nodo).text
-            resultado = 'NORMAL' if t_total < 5 else 'DEGRADADO'
+            resultado = "NORMAL" if t_total < 5 else "DEGRADADO"
             break
 
         except:
@@ -38,25 +38,25 @@ def test_ingreso_eu():
             if intentos == 3:
                 screenshot = f"./screenshots/error-ingreso eu {nodo}-{time.strftime('%Y-%m-%d-%H-%M-%S')}.png"
                 driver.save_screenshot(screenshot)
-                resultado = 'ERROR'
+                resultado = "ERROR"
 
         finally:
             driver.close()
-    
-    return 'ingreso_eu',nodo,t_totals,resultado
+
+    return "ingreso_eu", nodo, t_totals, resultado
 
 
 def test_ingreso_eug():
     intentos = 0
-    resultado = ''
-    nodo = ''
-    t_totals = ''
+    resultado = ""
+    nodo = ""
+    t_totals = ""
     while intentos < 3:
         try:
             driver = crear_sesion()
-            url = URL_GEDO
+            url = "https://cas.gdeba.gba.gob.ar/acceso/login/?service=https://eug.gdeba.gba.gob.ar/gedo-web/j_spring_cas_security_check"
             driver.get(url)
-            nodo = ''
+            nodo = ""
 
             buscar_elemento(driver, By.CSS_SELECTOR, cas.input_usuario).send_keys(USER)
             buscar_elemento(driver, By.CSS_SELECTOR, cas.input_passw).send_keys(PASSW)
@@ -68,7 +68,7 @@ def test_ingreso_eug():
             t_total = t_fin - t_ini
             t_totals = str("%.2f" % t_total)
             nodo = buscar_elemento(driver, By.CSS_SELECTOR, eug.nodo).text
-            resultado = 'NORMAL' if t_total < 5 else 'DEGRADADO'
+            resultado = "NORMAL" if t_total < 5 else "DEGRADADO"
             break
 
         except:
@@ -76,25 +76,25 @@ def test_ingreso_eug():
             if intentos == 3:
                 screenshot = f"./screenshots/error-ingreso_eug {nodo}-{time.strftime('%Y-%m-%d-%H-%M-%S')}.png"
                 driver.save_screenshot(screenshot)
-                resultado = 'ERROR'
+                resultado = "ERROR"
 
         finally:
             driver.close()
-    
-    return 'ingreso_eug',nodo,t_totals,resultado
+
+    return "ingreso_eug", nodo, t_totals, resultado
 
 
 def test_ingreso_euc():
     intentos = 0
-    resultado = ''
-    nodo = ''
-    t_totals = ''
+    resultado = ""
+    nodo = ""
+    t_totals = ""
     while intentos < 3:
         try:
             driver = crear_sesion()
-            url = URL_CCOO
+            url = "https://cas.gdeba.gba.gob.ar/acceso/login/?service=https://euc.gdeba.gba.gob.ar/ccoo-web/j_spring_cas_security_check"
             driver.get(url)
-            nodo = ''
+            nodo = ""
 
             buscar_elemento(driver, By.CSS_SELECTOR, cas.input_usuario).send_keys(USER)
             buscar_elemento(driver, By.CSS_SELECTOR, cas.input_passw).send_keys(PASSW)
@@ -106,7 +106,7 @@ def test_ingreso_euc():
             t_total = t_fin - t_ini
             t_totals = str("%.2f" % t_total)
             nodo = buscar_elemento(driver, By.CSS_SELECTOR, euc.nodo).text
-            resultado = 'NORMAL' if t_total < 5 else 'DEGRADADO'
+            resultado = "NORMAL" if t_total < 5 else "DEGRADADO"
             break
 
         except:
@@ -114,25 +114,25 @@ def test_ingreso_euc():
             if intentos == 3:
                 screenshot = f"./screenshots/error-ingreso_euc {nodo}-{time.strftime('%Y-%m-%d-%H-%M-%S')}.png"
                 driver.save_screenshot(screenshot)
-                resultado = 'ERROR'
+                resultado = "ERROR"
 
         finally:
             driver.close()
-    
-    return 'ingreso_euc',nodo,t_totals,resultado
+
+    return "ingreso_euc", nodo, t_totals, resultado
 
 
 def test_ingreso_eue():
     intentos = 0
-    resultado = ''
-    nodo = ''
-    t_totals = ''
+    resultado = ""
+    nodo = ""
+    t_totals = ""
     while intentos < 3:
         try:
             driver = crear_sesion()
-            url = URL_EE
+            url = "https://cas.gdeba.gba.gob.ar/acceso/login/?service=https://eue.gdeba.gba.gob.ar/expedientes-web/j_spring_cas_security_check"
             driver.get(url)
-            nodo = ''
+            nodo = ""
 
             buscar_elemento(driver, By.CSS_SELECTOR, cas.input_usuario).send_keys(USER)
             buscar_elemento(driver, By.CSS_SELECTOR, cas.input_passw).send_keys(PASSW)
@@ -144,7 +144,7 @@ def test_ingreso_eue():
             t_total = t_fin - t_ini
             t_totals = str("%.2f" % t_total)
             nodo = buscar_elemento(driver, By.CSS_SELECTOR, eue.nodo).text
-            resultado = 'NORMAL' if t_total < 5 else 'DEGRADADO'
+            resultado = "NORMAL" if t_total < 5 else "DEGRADADO"
             break
 
         except:
@@ -152,25 +152,25 @@ def test_ingreso_eue():
             if intentos == 3:
                 screenshot = f"./screenshots/error-ingreso_eue {nodo}-{time.strftime('%Y-%m-%d-%H-%M-%S')}.png"
                 driver.save_screenshot(screenshot)
-                resultado = 'ERROR'
+                resultado = "ERROR"
 
         finally:
             driver.close()
-    
-    return 'ingreso_eue',nodo,t_totals,resultado
+
+    return "ingreso_eue", nodo, t_totals, resultado
 
 
 def test_ingreso_rlm():
     intentos = 0
-    resultado = ''
-    nodo = ''
-    t_totals = ''
+    resultado = ""
+    nodo = ""
+    t_totals = ""
     while intentos < 3:
         try:
             driver = crear_sesion()
-            url = URL_RLM
+            url = "https://cas.gdeba.gba.gob.ar/acceso/login/?service=https://eur.gdeba.gba.gob.ar/rlm-web/j_spring_cas_security_check"
             driver.get(url)
-            nodo = ''
+            nodo = ""
 
             buscar_elemento(driver, By.CSS_SELECTOR, cas.input_usuario).send_keys(USER)
             buscar_elemento(driver, By.CSS_SELECTOR, cas.input_passw).send_keys(PASSW)
@@ -182,7 +182,7 @@ def test_ingreso_rlm():
             t_total = t_fin - t_ini
             t_totals = str("%.2f" % t_total)
             nodo = buscar_elemento(driver, By.CSS_SELECTOR, rlm.nodo).text
-            resultado = 'NORMAL' if t_total < 5 else 'DEGRADADO'
+            resultado = "NORMAL" if t_total < 5 else "DEGRADADO"
             break
 
         except:
@@ -190,25 +190,25 @@ def test_ingreso_rlm():
             if intentos == 3:
                 screenshot = f"./screenshots/error-ingreso_rlm {nodo}-{time.strftime('%Y-%m-%d-%H-%M-%S')}.png"
                 driver.save_screenshot(screenshot)
-                resultado = 'ERROR'
+                resultado = "ERROR"
 
         finally:
             driver.close()
-    
-    return 'ingreso_rlm',nodo,t_totals,resultado
+
+    return "ingreso_rlm", nodo, t_totals, resultado
 
 
 def test_ingreso_redip():
     intentos = 0
-    resultado = ''
-    nodo = ''
-    t_totals = ''
+    resultado = ""
+    nodo = ""
+    t_totals = ""
     while intentos < 3:
         try:
             driver = crear_sesion()
-            url = URL_REDIP
+            url = "https://cas.gdeba.gba.gob.ar/acceso/login/?service=https://redip.gdeba.gba.gob.ar/redip-web/j_spring_cas_security_check"
             driver.get(url)
-            nodo = ''
+            nodo = ""
 
             buscar_elemento(driver, By.CSS_SELECTOR, cas.input_usuario).send_keys(USER)
             buscar_elemento(driver, By.CSS_SELECTOR, cas.input_passw).send_keys(PASSW)
@@ -222,7 +222,7 @@ def test_ingreso_redip():
             t_total = t_fin - t_ini
             t_totals = str("%.2f" % t_total)
             nodo = buscar_elemento(driver, By.CSS_SELECTOR, redip.nodo).text
-            resultado = 'NORMAL' if t_total < 5 else 'DEGRADADO'
+            resultado = "NORMAL" if t_total < 5 else "DEGRADADO"
             break
 
         except:
@@ -230,19 +230,35 @@ def test_ingreso_redip():
             if intentos == 3:
                 screenshot = f"./screenshots/error-ingreso_redip {nodo}-{time.strftime('%Y-%m-%d-%H-%M-%S')}.png"
                 driver.save_screenshot(screenshot)
-                resultado = 'ERROR'
+                resultado = "ERROR"
 
         finally:
             driver.close()
-    
-    return 'ingreso_redip',nodo,t_totals,resultado
+
+    return "ingreso_redip", nodo, t_totals, resultado
 
 
-if __name__ == '__main__':
-
-    result_dic_con = {'TEST': [], 'NODO': [], 'TIEMPO (seg)': [], 'RESULTADO': [], 'NRO GDEBA': []}
-    result_dic_log = {'TEST': [], 'NODO': [], 'TIEMPO (seg)': [], 'RESULTADO': [], 'NRO GDEBA': []}
-    pbar = tqdm(total=6, ncols=90, colour='green', bar_format = "{l_bar}{bar}| {n_fmt}/{total_fmt}")
+if __name__ == "__main__":
+    result_dic_con = {
+        "TEST": [],
+        "NODO": [],
+        "TIEMPO (seg)": [],
+        "RESULTADO": [],
+        "NRO GDEBA": [],
+    }
+    result_dic_log = {
+        "TEST": [],
+        "NODO": [],
+        "TIEMPO (seg)": [],
+        "RESULTADO": [],
+        "NRO GDEBA": [],
+    }
+    pbar = tqdm(
+        total=6,
+        ncols=90,
+        colour="green",
+        bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt}",
+    )
 
     # Ingreso Modulos
     pbar.set_description("Test Ingreso EU")
@@ -265,8 +281,10 @@ if __name__ == '__main__':
     pbar.update(1)
     pbar.set_description("Finalizado")
     pbar.close()
-    
-    pdtabulate=lambda df:tabulate(df,headers='keys',tablefmt='pretty', showindex="never")
-    
+
+    pdtabulate = lambda df: tabulate(
+        df, headers="keys", tablefmt="pretty", showindex="never"
+    )
+
     df_con = pd.DataFrame(result_dic_con)
     print(pdtabulate(df_con))

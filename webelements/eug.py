@@ -12,3 +12,9 @@ span_nro_gedo = "//span[contains(text(),'Se ha generado correctamente el documen
 boton_portafirma = "//span[normalize-space()='Porta Firma']"
 boton_firmar_seleccionados = "//button[@title='Firmar las solicitudes seleccionadas en la lista']"
 boton_volver = "//button[normalize-space()='Volver']"
+#Se agregó esta parte para verificar si funciona el portafirma.py
+boton_portafirma_configuracion= "body .z-tabbox .z-tabpanels li:nth-child(3) > a > .z-tab-text"
+activar_portafirma="//span[normalize-space()='Activar Porta Firma']"
+boton_guardar="//button[normalize-space()='Guardar']"
+boton_mis_tareas = "//span[normalize-space()='Mis Tareas']"
+boton_OK = "//button[normalize-space()='OK']"

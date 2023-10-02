@@ -1,1 +1,5 @@
-/config.py
+config.py
+logs/*
+screenshots/*
+.wdm
+__pycache__
