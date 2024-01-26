@@ -36,7 +36,7 @@ def test_firmar_ccoo(acronimo):
             buscar_elemento(driver, By.XPATH, euc.input_motivo).send_keys(
                 "Documento de prueba. Carece de motivacion administrativa"
             )
-            time.sleep(1)
+            time.sleep(5)
             driver.switch_to.frame(1)
             # Escribo en el body
             editor_body = driver.find_element(By.XPATH, "//body")

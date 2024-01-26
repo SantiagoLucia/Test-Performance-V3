@@ -37,7 +37,7 @@ def test_firmar_gedo(acronimo):
             buscar_elemento(driver, By.XPATH, eug.input_motivo).send_keys(
                 "Documento de prueba. Carece de motivacion administrativa"
             )
-            time.sleep(1)
+            time.sleep(5)
 
             if acronimo == "TESTL":
                 driver.switch_to.frame(1)
@@ -126,6 +126,7 @@ def test_firmar_portafirma():
                     By.XPATH,
                     f"(//span[@class='z-listitem-checkable z-listitem-checkbox'])[{num}]",
                 ).click()
+            time.sleep(3)
             buscar_elemento(driver, By.XPATH, eug.boton_firmar_seleccionados).click()
             buscar_elemento(driver, By.XPATH, eug.boton_firmar_con_certificado).click()
             t_ini = time.perf_counter()
