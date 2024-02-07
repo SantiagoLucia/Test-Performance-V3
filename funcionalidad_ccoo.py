@@ -66,6 +66,7 @@ def test_firmar_ccoo(acronimo):
         except:
             intentos += 1
             if intentos == 3:
+                nro_gedo = ""
                 screenshot = f"./screenshots/error-firmar ccoo {nodo}-{time.strftime('%Y-%m-%d-%H-%M-%S')}.png"
                 driver.save_screenshot(screenshot)
                 resultado = "ERROR"

@@ -57,6 +57,7 @@ def test_caratular_expediente():
         except:
             intentos += 1
             if intentos == 3:
+                nro_exped = ""
                 screenshot = f"./screenshots/error-caratular expediente {nodo}-{time.strftime('%Y-%m-%d-%H-%M-%S')}.png"
                 driver.save_screenshot(screenshot)
                 resultado = "ERROR"
@@ -170,6 +171,7 @@ def test_guarda_temporal():
         except:
             intentos += 1
             if intentos == 3:
+                nro_exped = ""
                 screenshot = f"./screenshots/error-guarda temporal {nodo}-{time.strftime('%Y-%m-%d-%H-%M-%S')}.png"
                 driver.save_screenshot(screenshot)
                 resultado = "ERROR"
